@@ -1,22 +1,17 @@
-import "./App.css";
-import { login } from "./actions/login";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+
+import Carrello from "./pages/Carrello";
+import Homepage from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
-  const dispatch = useDispatch();
-  const stato = useSelector((state) => state);
-
-  const loginFunc = () => {
-    dispatch(login('ciaone'));
-  };
-
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={loginFunc}>login</button>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/homepage" component={Homepage} />
+      <Route exact path="/carrello" component={Carrello} />
+    </Switch>
   );
 }
 
