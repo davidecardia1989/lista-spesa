@@ -12,7 +12,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { isEmpty } from "lodash";
 import { Link } from "react-router-dom";
 
-const ItemsList = ({ list, onAdd, onItemClick }) => {
+const ItemsList = ({ list, onAdd }) => {
   const defaultList = Array.from(Array(10).keys());
   // console.log(list);
   return (

@@ -10,6 +10,7 @@ import NavHeader from "../../components/NavHeader";
 import ItemsList from "../../components/ItemsList";
 
 import { fetchData } from "../../actions/Homepage";
+import { addingProduct } from "../../actions/Carrello";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,10 +31,14 @@ export default function Homepage() {
   const { home, shoppingChart } = useSelector((state) => state);
   const { list } = home;
   const { itemsList, boughtItems } = shoppingChart;
-  console.log(boughtItems);
+
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+
+  const onAddProduct = (product) => {
+    dispatch(addingProduct(product));
+  };
 
   return (
     <div>
@@ -50,7 +55,7 @@ export default function Homepage() {
             Shopping List
           </Typography>
           <div className={classes.paper}>
-            <ItemsList list={list} />
+            <ItemsList onAdd={onAddProduct} list={list} />
           </div>
         </Grid>
       </div>

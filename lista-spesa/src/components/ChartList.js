@@ -11,6 +11,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import { isEmpty } from "lodash";
 import { useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Link } from "react-router-dom";
 
 const ChartList = ({ itemsList, onDelete }) => {
   return (
@@ -27,9 +28,15 @@ const ChartList = ({ itemsList, onDelete }) => {
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
-
-                <ListItemText primary={item.title} secondary={item.category} />
-
+                <Link
+                  to={`/product/${item.id}`}
+                  style={{ textDecoration: "none", color: "none" }}
+                >
+                  <ListItemText
+                    primary={item.title}
+                    secondary={item.category}
+                  />
+                </Link>
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
