@@ -8,44 +8,35 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FolderIcon from "@material-ui/icons/Folder";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { isEmpty } from "lodash";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import DeleteIcon from "@material-ui/icons/Delete";
 
-const ItemsList = ({ list, onAdd, onItemClick }) => {
-  const defaultList = Array.from(Array(10).keys());
-  // console.log(list);
+const ChartList = ({ itemsList, onDelete }) => {
   return (
     <div>
       <List>
-        {isEmpty(list)
-          ? defaultList.map(() => (
+        {isEmpty(itemsList)
+          ? itemsList.map(() => (
               <Skeleton width={410} height={58} animation="wave" />
             ))
-          : list.map((item) => (
+          : itemsList.map((item) => (
               <ListItem>
                 <ListItemAvatar>
                   <Avatar>
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <Link
-                  to={`/product/${item.id}`}
-                  style={{ textDecoration: "none", color: "none" }}
-                >
-                  <ListItemText
-                    primary={item.title}
-                    secondary={item.category}
-                  />
-                </Link>
+
+                <ListItemText primary={item.title} secondary={item.category} />
 
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
                     aria-label="add"
-                    onClick={() => onAdd(item)}
+                    onClick={() => onDelete(item.id)}
                   >
-                    <AddShoppingCartIcon />
+                    <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -55,4 +46,4 @@ const ItemsList = ({ list, onAdd, onItemClick }) => {
   );
 };
 
-export default ItemsList;
+export default ChartList;

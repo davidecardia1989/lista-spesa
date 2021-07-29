@@ -5,8 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
-import Header from "../../components/Header";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import NavHeader from "../../components/NavHeader";
 import ItemsList from "../../components/ItemsList";
 
 import { fetchData } from "../../actions/Homepage";
@@ -27,19 +27,27 @@ const useStyles = makeStyles((theme) => ({
 export default function Homepage() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { list } = useSelector((state) => state.home);
-
+  const { home, shoppingChart } = useSelector((state) => state);
+  const { list } = home;
+  const { itemsList, boughtItems } = shoppingChart;
+  console.log(boughtItems);
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
   return (
     <div>
-      <Header />
+      <NavHeader items={itemsList.length} />
+      {boughtItems && (
+        <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          Items bought
+        </Alert>
+      )}
       <div style={{ padding: "2em" }}>
         <Grid item xs={12} md={6}>
           <Typography variant="h5" className={classes.title}>
-            Lista Spesa
+            Shopping List
           </Typography>
           <div className={classes.paper}>
             <ItemsList list={list} />

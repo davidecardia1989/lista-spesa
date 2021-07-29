@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function NavHeader({ items }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -115,7 +115,10 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <Link to='/homepage' style={{ color: "inherit",textDecoration:'none' }}>
+          <Link
+            to="/homepage"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
             <Typography className={classes.title} variant="h4" noWrap>
               David's Shop
             </Typography>
@@ -142,8 +145,8 @@ export default function PrimarySearchAppBar() {
               onClick={() => console.log("shoppingcart")}
               color="inherit"
             >
-              <Badge badgeContent={17} color="secondary">
-                <Link to='/carrello' style={{ color: "inherit" }}>
+              <Badge badgeContent={items || 0} color="secondary">
+                <Link to="/carrello" style={{ color: "inherit" }}>
                   <ShoppingCartIcon />
                 </Link>
               </Badge>
